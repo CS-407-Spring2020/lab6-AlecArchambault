@@ -23,7 +23,7 @@ import com.google.android.gms.maps.model.PolylineOptions;
 
 public class MainActivity extends FragmentActivity {
 
-    private final LatLng mDestinationLatLng = new LatLng(-33.8523341, 151.2106085);
+    private final LatLng mDestinationLatLng = new LatLng(43.0753, -89.4042);
     private GoogleMap mMap;
     private FusedLocationProviderClient mFusedLocationProviderClient;
     private static final int PERMISSION_REQUEST_ACCESS_FINE_LOCATION = 12;
@@ -49,6 +49,7 @@ public class MainActivity extends FragmentActivity {
     private void displayMyLocation(){
         int permission = ActivityCompat.checkSelfPermission(this.getApplicationContext(),
                 android.Manifest.permission.ACCESS_FINE_LOCATION);
+
         if(permission== PackageManager.PERMISSION_DENIED){
             ActivityCompat.requestPermissions(this,
                     new String[]{android.Manifest.permission.ACCESS_FINE_LOCATION},
@@ -61,6 +62,7 @@ public class MainActivity extends FragmentActivity {
                             mMap.addPolyline(new PolylineOptions().add(
                                     new LatLng(maLastKnownLocation.getLatitude(), maLastKnownLocation.getLongitude()),
                                     mDestinationLatLng));
+                            mMap.addMarker(new MarkerOptions().position(new LatLng(maLastKnownLocation.getLatitude(), maLastKnownLocation.getLongitude())).title("Start"));
                         }
                     });
         }
